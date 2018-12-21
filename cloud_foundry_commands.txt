@@ -1,0 +1,59 @@
+install pcfd-dev follow https://docs.pivotal.io/pcf-dev/configuring.html
+
+install pcf cli
+cd C:\Program Files\Cloud Foundry
+cf login https://api.run.pivotal.io
+-----------------------------------------------------------------
+*************Dated March-2nd-2018**************************
+https://console.run.pivotal.io/organizations/de683bbb-be84-4e62-b296-a8e154d59d64
+cf login -a api.run.pivotal.io
+
+cf push shelly-helloworld-cf -p target\spring-helloWorld-cf-0.0.1-SNAPSHOT.jar
+
+https://shelly-helloworld-cf.cfapps.io/hello?name=howtodoinjava
+https://shelly-helloworld-cf.cfapps.io/
+
+
+************************Boeing********************************
+
+cf login -a https://api.system.pcfpre-phx.cloud.boeing.com --sso
+https://login.system.pcfpre-phx.cloud.boeing.com/passcode
+cf push shelly-helloworld-cf -p target\spring-helloWorld-cf-0.0.1-SNAPSHOT.jar
+cf push spring-boot-hello-world -p target\spring-boot-hello-world-0.0.1-SNAPSHOT.jar
+
+https://shelly-helloworld-cf.apps.pcfpre-phx.cloud.boeing.com/hello?name=howtodoinjava
+
+
+cf push krishna-helloworld-cf -p target\spring-boot-hello-world-0.0.1-SNAPSHOT.jar
+https://krishna-helloworld-cf.apps.pcfpre-phx.cloud.boeing.com/hello?name=howtodoinjava
+
+
+https://spring-boot-hello-world.apps.pcfpre-phx.cloud.boeing.com/hello?name=howtodoinjava
+********************************************************
+
+CloudController
+|
+V
+BuildPack-->Staging
+|
+V
+Droplet
+
+*********************
+
+cf push shelly2-helloworld-cf -p target\spring-boot-hello-world-0.0.1-SNAPSHOT.jar
+https://shelly2-helloworld-cf.apps.pcfpre-phx.cloud.boeing.com/hello
+https://shelly2-helloworld-cf.apps.pcfpre-phx.cloud.boeing.com/ecs
+
+
+****************************
+cf push codegenerator -p target\codegenerator.war
+cf push cgbpm -p target\cgbpm.war
+
+************************************************
+
+cf push aireis_ui -p target\aireis-spring-boot-0.0.1-SNAPSHOT.war
+
+*******************
+
+cf push ecsconnection -p target\ecsconnection-0.0.1-SNAPSHOT.jar
