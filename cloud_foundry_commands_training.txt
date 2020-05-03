@@ -1,0 +1,43 @@
+
+************************Boeing********************************
+
+cf login -a https://api.system.pcfpre-phx.cloud.boeing.com --sso
+https://login.system.pcfpre-phx.cloud.boeing.com/passcode
+
+cf push spring-boot-pcf -p target\spring-boot-pcf-0.0.1-SNAPSHOT.jar
+https://spring-boot-pcf.apps.pcfpre-phx.cloud.boeing.com/hello
+
+cf logs spring-boot-pcf --recent
+
+**********************************training****************************
+
+cf login -a api.run.pivotal.io
+
+cf space development
+
+cf target -s development
+
+docker run -v "$PWD":/app -it --name cftest -e PORT=9090 node bash
+node app/app.js
+
+cf push cftest -i 1 -m 512M -c "node app.js" -n cftest-shelly
+
+curl http://cftest-shelly.cfapps.io/status
+
+echo "deb http://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+
+***********************8push container**************************
+
+cf push cftest --docker-image nginx
+
+FROM ubuntu:16.04
+RUN apt-get update -y && \
+apt-get install -y python-pip && \
+pip install flask && \
+rm -rf /var/lib/apt/lists/*
+ENV FLASK_APP=inv.py
+COPY . /app
+WORKDIR /app
+ENTRYPOINT ["python"]
+CMD ["-m", "flask", "run", "-h", "0.0.0.0", "-p", "8080"]
+EXPOSE 8080
